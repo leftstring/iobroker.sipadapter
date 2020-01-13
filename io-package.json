@@ -1,0 +1,67 @@
+{
+	"common": {
+		"name": "iobroker.sipadapter",
+		"version": "0.9.0",
+		"news": {
+			"0.9.0": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung"
+			}
+		},
+		"title": "SIP Adapter",
+		"desc": {
+			"en": "SIP Adapter",
+			"de": "SIP Adapter"
+		},
+		"authors": [
+			"Author <author@mail.com>"
+		],
+		"keywords": [
+			"ioBroker",
+			"template",
+			"Smart Home",
+			"home automation"
+		],
+		"license": "MIT",
+		"platform": "Javascript/Node.js",
+		"main": "build/main.js",
+		"icon": "icon.png",
+		"enabled": true,
+		"readme": "https://github.com/leftstring/iobroker.adapter.asteriskREADME.md",
+		"loglevel": "info",
+		"restartAdapters": [
+			"vis"
+		],
+		"localLink": "%web_protocol%://%ip%:%web_port%/vis/edit.html",
+		"mode": "daemon",
+		"type": "general",
+		"compact": true,
+		"materialize": true,
+		"materializeTab": true,
+		"adminTab": {
+			"singleton": true,
+			"name": {
+				"en": "SIP Adapter",
+				"de": "SIP Adapter"
+			},
+			"link": "",
+			"fa-icon": "info"
+		},
+		"supportCustoms": true,
+		"dependencies": [
+			{
+				"js-controller": ">=1.4.2"
+			},
+			"vis"
+		]
+	},
+	"native": {
+		"ipAddress": "",
+		"username": "",
+		"password": "",
+		"asteriskRealm": "",
+		"websocketProxyUrl": ""
+	},
+	"objects": [],
+	"instanceObjects": []
+}

@@ -1,0 +1,78 @@
+.widget-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	text-align: center;
+}
+
+.hidden {
+	display: none !important;
+}
+
+.label {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+#telephone-number-input {
+	width: 100%;
+	height: 48px;
+	box-sizing: border-box;
+}
+
+.button-container {	
+	display: flex; 
+	align-items: center;	
+	justify-content: center; 
+	padding: 32px;
+}
+
+.button-wrapper {
+	flex-grow: 1;
+	display: flex;
+	align-items: center; 
+	justify-content: center;
+}
+
+.button-wrapper button {
+	padding: 8px;
+}
+
+.button-wrapper i {
+	vertical-align: middle;
+}
+
+.button-wrapper span {
+	margin-left: 4px;
+}
+
+#volume-slider {  
+	-webkit-appearance: none;
+	background: lightgray;
+	cursor: pointer;
+	height: 20px;
+	overflow: hidden;
+	outline: none;
+}
+  
+#volume-slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 0px;
+	height: 0px;
+	background: dodgerblue;
+	cursor: pointer;
+	box-shadow: -100vw 0 0 100vw dodgerblue;
+}
+  
+#volume-slider::-moz-range-thumb {
+	width: 0px;
+	height: 0px;
+	background: dodgerblue;
+	cursor: pointer;
+	box-shadow: -100vw 0 0 100vw dodgerblue;
+	border: none;
+}
