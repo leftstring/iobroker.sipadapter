@@ -1,1 +1,1 @@
-# Doorbird Adapter with SIP over Asterisk
+# SIP Adapter for ioBroker
