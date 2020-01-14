@@ -13,18 +13,25 @@ vis.binds.sipadapter = {
 		if(!vis.editMode) {
 			vis.conn.getStates(null, (error, data) => {
 				console.log("Start initSIP method");
-				vis.updateStates(data);
+				// vis.updateStates(data);
+
+				console.log("set volume");
 
 				audioElement.volume = 0.5;
 
+				console.log("load sip account");
 				vis.binds.sipadapter.sipAccount = new SIPWebRTCAccount();
 
 				if (vis.binds.sipadapter.sipAccount.IsCorrectInitialized()) {
-                    vis.binds.sipadapter.sipCommunication = new SIPWebRTCCommunication(vis.binds.sipadapter.sipAccount, audioElement);
+					console.log("setup sip communication");
+					vis.binds.sipadapter.sipCommunication = new SIPWebRTCCommunication(vis.binds.sipadapter.sipAccount, audioElement);
+					console.log("sip communication ready");
                     vis.binds.sipadapter.sipCommunication.onCallIncoming = vis.binds.sipadapter.onCallIncoming;
 					vis.binds.sipadapter.sipCommunication.onCallTerminated = vis.binds.sipadapter.onCallTerminated;
-					vis.binds.sipadapter.sipCommunication.onCallConnected = vis.binds.sipadapter.onCallConnected;										
+					vis.binds.sipadapter.sipCommunication.onCallConnected = vis.binds.sipadapter.onCallConnected;
+					console.log("sip event handlers added");										
 				} else {
+					console.log("request account data");
 					vis.binds.sipadapter.requestAsteriskAccountData(audioElement);
 				}
 
