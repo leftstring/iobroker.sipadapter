@@ -4,7 +4,6 @@
 node_modules
 nbproject
 .vs/
-build/
 
 # Sourcemaps
 maps/
