@@ -14,20 +14,20 @@
 			"de": "SIP Adapter"
 		},
 		"authors": [
-			"Author <author@mail.com>"
+			"Sebastian Bäumlisberger",
+            "Sebastian Waldmann",
 		],
 		"keywords": [
+            "SIP",
 			"ioBroker",
-			"template",
-			"Smart Home",
-			"home automation"
+			"Smart Home"			
 		],
 		"license": "MIT",
 		"platform": "Javascript/Node.js",
 		"main": "build/main.js",
 		"icon": "icon.png",
 		"enabled": true,
-		"readme": "https://github.com/leftstring/iobroker.adapter.asteriskREADME.md",
+		"readme": "https://github.com/leftstring/iobroker.sipadapter/blob/master/README.md",
 		"loglevel": "info",
 		"restartAdapters": [
 			"vis"
