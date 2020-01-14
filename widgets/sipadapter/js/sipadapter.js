@@ -104,6 +104,8 @@ vis.binds.sipadapter = {
 	requestAsteriskAccountData: function (audioElement) {
 		console.log("Open dialog for asterisk account data.")
 		const accountDataDialog = document.getElementById("sipAccountDataDialog");
+		dialogPolyfill.registerDialog(accountDataDialog);
+
         var cancelButton = document.getElementById('cancel');
         var confirmButton = document.getElementById('confirm');
 
