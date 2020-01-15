@@ -17,6 +17,9 @@
       <div>
         <div id="makeCallContainer">
           <input id="telephone-number-input" type="tel" placeholder="Telefonnummer eingeben..." />
+          <button onclick="vis.binds.sipadapter.configureAsteriskAccount()" style="float: right; padding: 4px 4px 2px 4px;">
+            <i class="material-icons" style="font-size: 14px">build</i>
+          </button>
           <div class="button-container">
             <div id="callButton" class="button-wrapper">
               <button onclick="vis.binds.sipadapter.makeCall()">
@@ -76,16 +79,17 @@
   
 	<dialog id="sipAccountDataDialog">
       <form method="dialog">
+        <h3 style="margin-top: 0px">SIP-Account Daten</h3>
         <label for="accountDataDialogPrivateIdentity">Private Indentity</label>
         <input id="accountDataDialogPrivateIdentity"/>
         <br/>
         <label for="accountDataDialogPublicIdentity">Public Identity</label>
         <input id="accountDataDialogPublicIdentity"/>
         <br/>
-        <label for="accountDataDialogPassword">Password</label>
+        <label for="accountDataDialogPassword">Passwort</label>
         <input id="accountDataDialogPassword" type="password"/>
         <br/>
-        <label for="accountDataDialogDisplayName">Display Name</label>
+        <label for="accountDataDialogDisplayName">Anzeigename</label>
         <input id="accountDataDialogDisplayName"/>
         <br/>
         <label for="accountDataDialogRealm">Realm</label>
@@ -95,8 +99,8 @@
         <input id="accountDataDialogWebsocketProxyURL"/>
         <br/>
         <menu>
-          <button id="cancel">Cancel</button>
-          <button id="confirm">Confirm</button>
+          <button id="cancel">Abbrechen</button>
+          <button id="confirm">Bestätigen</button>
         </menu>
       </form>
     </dialog>
@@ -105,7 +109,7 @@
 
     <script type="text/javascript">
       vis.binds.sipadapter.accountDialogReady();
-   </script>
+    </script>
 
 </script>
 

@@ -76,3 +76,14 @@
 	box-shadow: -100vw 0 0 100vw dodgerblue;
 	border: none;
 }
+
+#sipAccountDataDialog {
+	margin: 0px;
+    width: 340px;
+    top: 32px;
+    left: calc(50vw - 150px);
+}
+
+#sipAccountDataDialog input {
+	margin-bottom: 8px;
+}

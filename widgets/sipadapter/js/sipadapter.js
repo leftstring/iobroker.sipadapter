@@ -97,7 +97,7 @@ vis.binds.sipadapter = {
 		audioElement.volume = volumeSlider.value;
 	},
 	accountDialogReady: function () {	
-		if(!vis.binds.sipadapter.accountDialogFlag) {
+		if(!vis.editMode && !vis.binds.sipadapter.accountDialogFlag) {
 			var audio = document.getElementById("audioRemote")
 			var accountDialog = document.getElementById("sipAccountDataDialog");
 			vis.binds.sipadapter.accountDialogFlag = vis.binds.sipadapter.requestAsteriskAccountData(audio, accountDialog);
@@ -127,7 +127,7 @@ vis.binds.sipadapter = {
 
 		accountDataDialog.showModal();
 		return true;
-	},
+	},	
     onAccountDataDialogSubmit(audioElement){
         const privateIdentityElement = document.getElementById("accountDataDialogPrivateIdentity");
         const publicIdentityElement = document.getElementById("accountDataDialogPublicIdentity");
@@ -148,5 +148,24 @@ vis.binds.sipadapter = {
         vis.binds.sipadapter.sipCommunication = new SIPWebRTCCommunication(vis.binds.sipadapter.sipAccount, audioElement);
         vis.binds.sipadapter.sipCommunication.onCallIncoming = vis.binds.sipadapter.onCallIncoming;
 		vis.binds.sipadapter.sipCommunication.onCallTerminated = vis.binds.sipadapter.onCallTerminated;
-    }
+	},
+	configureAsteriskAccount: function() {
+		const privateIdentityElement = document.getElementById("accountDataDialogPrivateIdentity");
+        const publicIdentityElement = document.getElementById("accountDataDialogPublicIdentity");
+        const passwordElement = document.getElementById("accountDataDialogPassword");
+		const displayNameElement = document.getElementById("accountDataDialogDisplayName");
+		const websocketProxyUrlElement = document.getElementById("accountDataDialogWebsocketProxyURL");
+		const realmElement = document.getElementById("accountDataDialogRealm");
+
+		privateIdentityElement.value =  vis.binds.sipadapter.sipAccount.PrivateIdentity;
+		publicIdentityElement.value =  vis.binds.sipadapter.sipAccount.PublicIdentity;
+		passwordElement.value =  vis.binds.sipadapter.sipAccount.Password;
+		displayNameElement.value =  vis.binds.sipadapter.sipAccount.DisplayName;
+		websocketProxyUrlElement.value =  vis.binds.sipadapter.sipAccount.WebsocketProxyURL;
+		realmElement.value =  vis.binds.sipadapter.sipAccount.Realm;
+
+		var audio = document.getElementById("audioRemote")
+		var accountDialog = document.getElementById("sipAccountDataDialog");
+		vis.binds.sipadapter.accountDialogFlag = vis.binds.sipadapter.requestAsteriskAccountData(audio, accountDialog);
+	}
 };
