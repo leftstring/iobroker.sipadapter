@@ -25,7 +25,7 @@ vis.binds.sipadapter = {
 				vis.binds.sipadapter.sipCommunication.onCallTerminated = vis.binds.sipadapter.onCallTerminated;
 				vis.binds.sipadapter.sipCommunication.onCallConnected = vis.binds.sipadapter.onCallConnected;
 				console.log("sip event handlers added");										
-			} else {
+			} else if(!vis.binds.sipadapter.accountDialogFlag) {
 				console.log("request account data");
 				vis.binds.sipadapter.accountDialogFlag = vis.binds.sipadapter.requestAsteriskAccountData(audioElement);
 			}
@@ -97,7 +97,7 @@ vis.binds.sipadapter = {
 	},
 	accountDialogReady: function (accountDataDialog) {	
 		if(!vis.binds.sipadapter.accountDialogFlag) {
-			vis.binds.sipadapter.requestAsteriskAccountData(document.getElementById("audioRemote"));
+			vis.binds.sipadapter.accountDialogFlag = vis.binds.sipadapter.requestAsteriskAccountData(document.getElementById("audioRemote"));
 		}
 	},
 	requestAsteriskAccountData: function (audioElement) {	
