@@ -96,9 +96,11 @@ vis.binds.sipadapter = {
 		var volumeSlider = document.getElementById("volume-slider");
 		audioElement.volume = volumeSlider.value;
 	},
-	accountDialogReady: function (accountDataDialog) {	
+	accountDialogReady: function () {	
 		if(!vis.binds.sipadapter.accountDialogFlag) {
-			vis.binds.sipadapter.accountDialogFlag = vis.binds.sipadapter.requestAsteriskAccountData(document.getElementById("audioRemote"), accountDataDialog);
+			var audio = document.getElementById("audioRemote")
+			var accountDialog = document.getElementById("sipAccountDataDialog");
+			vis.binds.sipadapter.accountDialogFlag = vis.binds.sipadapter.requestAsteriskAccountData(audio, accountDataDialog);
 		}
 	},
 	requestAsteriskAccountData: function (audioElement, accountDataDialog) {	
