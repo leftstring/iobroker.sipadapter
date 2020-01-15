@@ -27,7 +27,8 @@ vis.binds.sipadapter = {
 				console.log("sip event handlers added");										
 			} else if(!vis.binds.sipadapter.accountDialogFlag) {
 				console.log("request account data");
-				vis.binds.sipadapter.accountDialogFlag = vis.binds.sipadapter.requestAsteriskAccountData(audioElement);
+				var accountDialog = document.getElementById("sipAccountDataDialog");
+				vis.binds.sipadapter.accountDialogFlag = vis.binds.sipadapter.requestAsteriskAccountData(audioElement, accountDialog);
 			}
 
 			console.log("Passed initSIP method");		
@@ -97,14 +98,14 @@ vis.binds.sipadapter = {
 	},
 	accountDialogReady: function (accountDataDialog) {	
 		if(!vis.binds.sipadapter.accountDialogFlag) {
-			vis.binds.sipadapter.accountDialogFlag = vis.binds.sipadapter.requestAsteriskAccountData(document.getElementById("audioRemote"));
+			vis.binds.sipadapter.accountDialogFlag = vis.binds.sipadapter.requestAsteriskAccountData(document.getElementById("audioRemote"), accountDataDialog);
 		}
 	},
-	requestAsteriskAccountData: function (audioElement) {	
+	requestAsteriskAccountData: function (audioElement, accountDataDialog) {	
 		console.log("Open dialog for asterisk account data.")
-		const accountDataDialog = document.getElementById("sipAccountDataDialog");
 
 		if(!accountDataDialog){
+			console.log("account dialog not ready");
 			return false;
 		}
 
