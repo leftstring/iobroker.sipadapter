@@ -100,7 +100,7 @@ vis.binds.sipadapter = {
 		if(!vis.binds.sipadapter.accountDialogFlag) {
 			var audio = document.getElementById("audioRemote")
 			var accountDialog = document.getElementById("sipAccountDataDialog");
-			vis.binds.sipadapter.accountDialogFlag = vis.binds.sipadapter.requestAsteriskAccountData(audio, accountDataDialog);
+			vis.binds.sipadapter.accountDialogFlag = vis.binds.sipadapter.requestAsteriskAccountData(audio, accountDialog);
 		}
 	},
 	requestAsteriskAccountData: function (audioElement, accountDataDialog) {	
