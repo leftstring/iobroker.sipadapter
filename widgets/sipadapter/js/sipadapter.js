@@ -19,12 +19,19 @@ vis.binds.sipadapter = {
 
 			if (vis.binds.sipadapter.sipAccount.IsCorrectInitialized()) {
 				console.log("setup sip communication");
-				vis.binds.sipadapter.sipCommunication = new SIPWebRTCCommunication(vis.binds.sipadapter.sipAccount, audioElement);
-				console.log("sip communication ready");
-                vis.binds.sipadapter.sipCommunication.onCallIncoming = vis.binds.sipadapter.onCallIncoming;
-				vis.binds.sipadapter.sipCommunication.onCallTerminated = vis.binds.sipadapter.onCallTerminated;
-				vis.binds.sipadapter.sipCommunication.onCallConnected = vis.binds.sipadapter.onCallConnected;
-				console.log("sip event handlers added");										
+				try {				
+					vis.binds.sipadapter.sipCommunication = new SIPWebRTCCommunication(vis.binds.sipadapter.sipAccount, audioElement);
+					console.log("sip communication ready");
+					vis.binds.sipadapter.sipCommunication.onCallIncoming = vis.binds.sipadapter.onCallIncoming;
+					vis.binds.sipadapter.sipCommunication.onCallTerminated = vis.binds.sipadapter.onCallTerminated;
+					vis.binds.sipadapter.sipCommunication.onCallConnected = vis.binds.sipadapter.onCallConnected;
+					console.log("sip event handlers added");		
+				}
+				catch(e) {
+					console.error("sip communication failed");
+					console.error(e);
+				}	
+				vis.binds.sipadapter.accountDialogFlag = true;									
 			} else if(!vis.binds.sipadapter.accountDialogFlag) {
 				console.log("request account data");
 				var accountDialog = document.getElementById("sipAccountDataDialog");
