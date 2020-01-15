@@ -37,11 +37,6 @@ class SIPWebRTCCommunication {
         return this._callSession.getRemoteFriendlyName() || "unknown";
     }
 
-    stop() {
-        this._registerSession.unregister();
-        this._sipStack.stop();
-    }
-
     /*
     * PRIVATE METHODS
     */
