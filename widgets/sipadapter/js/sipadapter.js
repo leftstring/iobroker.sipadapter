@@ -97,7 +97,7 @@ vis.binds.sipadapter = {
 	},
 	accountDialogReady: function (accountDataDialog) {	
 		if(!vis.binds.sipadapter.accountDialogFlag) {
-			requestAsteriskAccountData(document.getElementById("audioRemote"));
+			vis.binds.sipadapter.requestAsteriskAccountData(document.getElementById("audioRemote"));
 		}
 	},
 	requestAsteriskAccountData: function (audioElement) {	
