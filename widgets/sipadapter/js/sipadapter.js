@@ -27,6 +27,9 @@ vis.binds.sipadapter = {
 	initSIP: function() {
 		console.log("setup sip communication");
 		try {		
+			if(vis.binds.sipadapter.sipCommunication){
+				vis.binds.sipadapter.sipCommunication.stop();
+			}
 			var audioElement = document.getElementById("audioRemote");		
 			vis.binds.sipadapter.sipCommunication = new SIPWebRTCCommunication(vis.binds.sipadapter.sipAccount, audioElement);
 			console.log("sip communication ready");
