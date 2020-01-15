@@ -1,13 +1,13 @@
 class SIPWebRTCAccount {
 
-    CONST_PRIVATE_IDENTITY = "privateIdentity";
-    CONST_PUBLIC_IDENTITY = "publicIdentity";
-    CONST_PASSWORD = "password";
-    CONST_DISPLAY_NAME = "displayName";
-    CONST_WEBSOCKET_PROXY_URL = "websocket_proxy_url";
-    CONST_REALM = "realm";
-
     constructor(){
+        this.CONST_PRIVATE_IDENTITY = "privateIdentity";
+        this.CONST_PUBLIC_IDENTITY = "publicIdentity";
+        this.CONST_PASSWORD = "password";
+        this.CONST_DISPLAY_NAME = "displayName";
+        this.CONST_WEBSOCKET_PROXY_URL = "websocket_proxy_url";
+        this.CONST_REALM = "realm";
+
         this._privateIdentity = null;
         this._publicIdentity = null;
         this._password = null;
