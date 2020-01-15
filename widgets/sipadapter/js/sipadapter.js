@@ -5,41 +5,40 @@ console.log("start widget");
 vis.binds.sipadapter = {
 	version: "0.9.0",
     init: function (adapterInstance) {
+		console.log("Start init method");
 		vis.binds.sipadapter.adapterInstance = adapterInstance;
-		console.log("Passed init method");
-	},
-	initSIP: function(audioElement) {
-		if(!vis.editMode) {
-			console.log("Start initSIP method");
+		
+		if(!vis.editMode) {	
 			console.log("set volume");
+			var audioElement = document.getElementById("audioRemote");			
 			audioElement.volume = 0.5;
 
 			console.log("load sip account");
 			vis.binds.sipadapter.sipAccount = new SIPWebRTCAccount();
 
 			if (vis.binds.sipadapter.sipAccount.IsCorrectInitialized()) {
-				console.log("setup sip communication");
-				try {				
-					vis.binds.sipadapter.sipCommunication = new SIPWebRTCCommunication(vis.binds.sipadapter.sipAccount, audioElement);
-					console.log("sip communication ready");
-					vis.binds.sipadapter.sipCommunication.onCallIncoming = vis.binds.sipadapter.onCallIncoming;
-					vis.binds.sipadapter.sipCommunication.onCallTerminated = vis.binds.sipadapter.onCallTerminated;
-					vis.binds.sipadapter.sipCommunication.onCallConnected = vis.binds.sipadapter.onCallConnected;
-					console.log("sip event handlers added");		
-				}
-				catch(e) {
-					console.error("sip communication failed");
-					console.error(e);
-				}	
-				vis.binds.sipadapter.accountDialogFlag = true;									
-			} else if(!vis.binds.sipadapter.accountDialogFlag) {
-				console.log("request account data");
-				var accountDialog = document.getElementById("sipAccountDataDialog");
-				vis.binds.sipadapter.accountDialogFlag = vis.binds.sipadapter.requestAsteriskAccountData(audioElement, accountDialog);
+				vis.binds.sipadapter.initSIP();				
+			} else if(!vis.binds.sipadapter.accountDialogFlag) {								
+				vis.binds.sipadapter.requestSIPAccountData();
 			}
-
-			console.log("Passed initSIP method");		
+			console.log("Passed init method");		
 		}
+	},
+	initSIP: function() {
+		console.log("setup sip communication");
+		try {		
+			var audioElement = document.getElementById("audioRemote");		
+			vis.binds.sipadapter.sipCommunication = new SIPWebRTCCommunication(vis.binds.sipadapter.sipAccount, audioElement);
+			console.log("sip communication ready");
+			vis.binds.sipadapter.sipCommunication.onCallIncoming = vis.binds.sipadapter.onCallIncoming;
+			vis.binds.sipadapter.sipCommunication.onCallTerminated = vis.binds.sipadapter.onCallTerminated;
+			vis.binds.sipadapter.sipCommunication.onCallConnected = vis.binds.sipadapter.onCallConnected;
+			console.log("sip event handlers added");		
+		}
+		catch(e) {
+			console.error("sip communication failed");
+			console.error(e);
+		}	
 	},
 	onCallIncoming: function() {
 		console.log("call incoming");
@@ -103,39 +102,30 @@ vis.binds.sipadapter = {
 		var volumeSlider = document.getElementById("volume-slider");
 		audioElement.volume = volumeSlider.value;
 	},
-	accountDialogReady: function () {	
-		if(!vis.editMode && !vis.binds.sipadapter.accountDialogFlag) {
-			var audio = document.getElementById("audioRemote")
-			var accountDialog = document.getElementById("sipAccountDataDialog");
-			vis.binds.sipadapter.accountDialogFlag = vis.binds.sipadapter.requestAsteriskAccountData(audio, accountDialog);
-		}
-	},
-	requestAsteriskAccountData: function (audioElement, accountDataDialog) {	
+	requestSIPAccountData: function () {	
+		console.log("request account data");	
+		var accountDialog = document.getElementById("sipAccountDataDialog");				
+
 		console.log("Open dialog for asterisk account data.")
 
-		if(!accountDataDialog){
-			console.log("account dialog not ready");
-			return false;
-		}
-
-		dialogPolyfill.registerDialog(accountDataDialog);
+		dialogPolyfill.registerDialog(accountDialog);
 
         var cancelButton = document.getElementById('cancel');
         var confirmButton = document.getElementById('confirm');
 
         cancelButton.addEventListener('click', function() {
-            accountDataDialog.close();
+            accountDialog.close();
         });
 
         confirmButton.addEventListener('click', function() {
-            vis.binds.sipadapter.onAccountDataDialogSubmit(audioElement);
-            accountDataDialog.close();
+            vis.binds.sipadapter.onAccountDataDialogSubmit();
+            accountDialog.close();
         });
 
-		accountDataDialog.showModal();
-		return true;
+		accountDialog.showModal();
 	},	
-    onAccountDataDialogSubmit(audioElement){
+    onAccountDataDialogSubmit(){
+		console.log("onAccountDataDialogSubmit")
         const privateIdentityElement = document.getElementById("accountDataDialogPrivateIdentity");
         const publicIdentityElement = document.getElementById("accountDataDialogPublicIdentity");
         const passwordElement = document.getElementById("accountDataDialogPassword");
@@ -150,13 +140,13 @@ vis.binds.sipadapter = {
 		const websocket_proxy_url = websocketProxyUrlElement.value;
 		const realm = realmElement.value;
 
-        vis.binds.sipadapter.sipAccount.setAccountData(privateIdentity, publicIdentity, password, displayName, websocket_proxy_url, realm);
+		vis.binds.sipadapter.sipAccount.setAccountData(privateIdentity, publicIdentity, password, displayName, websocket_proxy_url, realm);
 
-        vis.binds.sipadapter.sipCommunication = new SIPWebRTCCommunication(vis.binds.sipadapter.sipAccount, audioElement);
-        vis.binds.sipadapter.sipCommunication.onCallIncoming = vis.binds.sipadapter.onCallIncoming;
-		vis.binds.sipadapter.sipCommunication.onCallTerminated = vis.binds.sipadapter.onCallTerminated;
+		vis.binds.sipadapter.initSIP();
 	},
 	configureAsteriskAccount: function() {
+		console.log("configureAsteriskAccount")
+
 		const privateIdentityElement = document.getElementById("accountDataDialogPrivateIdentity");
         const publicIdentityElement = document.getElementById("accountDataDialogPublicIdentity");
         const passwordElement = document.getElementById("accountDataDialogPassword");
@@ -171,8 +161,6 @@ vis.binds.sipadapter = {
 		websocketProxyUrlElement.value =  vis.binds.sipadapter.sipAccount.WebsocketProxyURL;
 		realmElement.value =  vis.binds.sipadapter.sipAccount.Realm;
 
-		var audio = document.getElementById("audioRemote")
-		var accountDialog = document.getElementById("sipAccountDataDialog");
-		vis.binds.sipadapter.accountDialogFlag = vis.binds.sipadapter.requestAsteriskAccountData(audio, accountDialog);
+		vis.binds.sipadapter.requestSIPAccountData();
 	}
 };

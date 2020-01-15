@@ -12,7 +12,7 @@
 	<div class="vis-widget <%== this.data.attr('class') %>" style="width:200px; height:200px; overflow: visible;" id="<%= this.data.attr('wid') %>">
     <div class="widget-container vis-widget-body <%== this.data.attr('class') %>">
             
-      <audio id="audioRemote" <%= function(element) {  vis.binds.sipadapter.initSIP(element); } %>/>        
+      <audio id="audioRemote"/>        
       
       <div>
         <div id="makeCallContainer">
@@ -105,10 +105,8 @@
       </form>
     </dialog>
 
-    <% vis.binds.sipadapter.init(this.data.adapterInstance);  %>
-
     <script type="text/javascript">
-      vis.binds.sipadapter.accountDialogReady();
+      vis.binds.sipadapter.init();
     </script>
 
 </script>

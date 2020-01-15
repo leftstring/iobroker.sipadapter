@@ -61,7 +61,7 @@ class SIPWebRTCCommunication {
             display_name: displayName,
             websocket_proxy_url: websocket_proxy_url,
             outbound_proxy_url: null,
-            ice_servers: "[]",
+            ice_servers: "[]", // disable ICE gathering
             enable_rtcweb_breaker: false,
             enable_early_ims: true, // Must be true unless you're using a real IMS network
             enable_media_stream_cache: true,
