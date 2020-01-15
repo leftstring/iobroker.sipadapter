@@ -6,37 +6,31 @@ vis.binds.sipadapter = {
 	version: "0.9.0",
     init: function (adapterInstance) {
 		vis.binds.sipadapter.adapterInstance = adapterInstance;
-
 		console.log("Passed init method");
 	},
 	initSIP: function(audioElement) {
 		if(!vis.editMode) {
-			vis.conn.getStates(null, (error, data) => {
-				console.log("Start initSIP method");
-				// vis.updateStates(data);
+			console.log("Start initSIP method");
+			console.log("set volume");
+			audioElement.volume = 0.5;
 
-				console.log("set volume");
+			console.log("load sip account");
+			vis.binds.sipadapter.sipAccount = new SIPWebRTCAccount();
 
-				audioElement.volume = 0.5;
+			if (vis.binds.sipadapter.sipAccount.IsCorrectInitialized()) {
+				console.log("setup sip communication");
+				vis.binds.sipadapter.sipCommunication = new SIPWebRTCCommunication(vis.binds.sipadapter.sipAccount, audioElement);
+				console.log("sip communication ready");
+                vis.binds.sipadapter.sipCommunication.onCallIncoming = vis.binds.sipadapter.onCallIncoming;
+				vis.binds.sipadapter.sipCommunication.onCallTerminated = vis.binds.sipadapter.onCallTerminated;
+				vis.binds.sipadapter.sipCommunication.onCallConnected = vis.binds.sipadapter.onCallConnected;
+				console.log("sip event handlers added");										
+			} else {
+				console.log("request account data");
+				vis.binds.sipadapter.requestAsteriskAccountData(audioElement);
+			}
 
-				console.log("load sip account");
-				vis.binds.sipadapter.sipAccount = new SIPWebRTCAccount();
-
-				if (vis.binds.sipadapter.sipAccount.IsCorrectInitialized()) {
-					console.log("setup sip communication");
-					vis.binds.sipadapter.sipCommunication = new SIPWebRTCCommunication(vis.binds.sipadapter.sipAccount, audioElement);
-					console.log("sip communication ready");
-                    vis.binds.sipadapter.sipCommunication.onCallIncoming = vis.binds.sipadapter.onCallIncoming;
-					vis.binds.sipadapter.sipCommunication.onCallTerminated = vis.binds.sipadapter.onCallTerminated;
-					vis.binds.sipadapter.sipCommunication.onCallConnected = vis.binds.sipadapter.onCallConnected;
-					console.log("sip event handlers added");										
-				} else {
-					console.log("request account data");
-					vis.binds.sipadapter.requestAsteriskAccountData(audioElement);
-				}
-
-				console.log("Passed initSIP method");
-			});
+			console.log("Passed initSIP method");		
 		}
 	},
 	onCallIncoming: function() {
