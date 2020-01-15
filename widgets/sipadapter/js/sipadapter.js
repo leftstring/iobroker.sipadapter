@@ -105,7 +105,7 @@ vis.binds.sipadapter = {
 		var volumeSlider = document.getElementById("volume-slider");
 		audioElement.volume = volumeSlider.value;
 	},
-	requestSIPAccountData: function () {	
+	requestSIPAccountData: function () {
 		console.log("request account data");	
 		var accountDialog = document.getElementById("sipAccountDataDialog");				
 
@@ -116,14 +116,16 @@ vis.binds.sipadapter = {
         var cancelButton = document.getElementById('cancel');
         var confirmButton = document.getElementById('confirm');
 
-        cancelButton.addEventListener('click', function() {
-            accountDialog.close();
-        });
-
-        confirmButton.addEventListener('click', function() {
-            vis.binds.sipadapter.onAccountDataDialogSubmit();
-            accountDialog.close();
-        });
+		if(!vis.binds.sipadapter.isAccountDialogInit) {
+			cancelButton.addEventListener('click', function() {
+				accountDialog.close();
+			});
+			confirmButton.addEventListener('click', function() {
+				vis.binds.sipadapter.onAccountDataDialogSubmit();
+				accountDialog.close();
+			});
+			vis.binds.sipadapter.isAccountDialogInit = true;
+		}
 
 		accountDialog.showModal();
 	},	

@@ -38,6 +38,7 @@ class SIPWebRTCCommunication {
     }
 
     stop() {
+        this._registerSession.unregister();
         this._sipStack.stop();
     }
 
