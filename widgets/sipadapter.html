@@ -9,35 +9,7 @@
 <script type="text/javascript" src="widgets/sipadapter/js/sipadapter.js"></script>
 
 <script id="tplsipadapterWidget" type="text/ejs" class="vis-tpl" data-vis-prev='' data-vis-set="sipadapter" data-vis-type="widget" data-vis-name="sipadapter">
-  
-  <dialog id="sipAccountDataDialog">
-    <form method="dialog">
-      <label for="accountDataDialogPrivateIdentity">Private Indentity</label>
-      <input id="accountDataDialogPrivateIdentity"/>
-      <br/>
-      <label for="accountDataDialogPublicIdentity">Public Identity</label>
-      <input id="accountDataDialogPublicIdentity"/>
-      <br/>
-      <label for="accountDataDialogPassword">Password</label>
-      <input id="accountDataDialogPassword" type="password"/>
-      <br/>
-      <label for="accountDataDialogDisplayName">Display Name</label>
-      <input id="accountDataDialogDisplayName"/>
-      <br/>
-      <label for="accountDataDialogRealm">Realm</label>
-      <input id="accountDataDialogRealm"/>
-      <br/>
-      <label for="accountDataDialogWebsocketProxyURL">Websocket Proxy URL</label>
-      <input id="accountDataDialogWebsocketProxyURL"/>
-      <br/>
-      <menu>
-        <button id="cancel">Cancel</button>
-        <button id="confirm">Confirm</button>
-      </menu>
-    </form>
-  </dialog>
-  
-  <div class="vis-widget <%== this.data.attr('class') %>" style="width:200px; height:200px;" id="<%= this.data.attr('wid') %>">
+	<div class="vis-widget <%== this.data.attr('class') %>" style="width:200px; height:200px;" id="<%= this.data.attr('wid') %>">
     <div class="widget-container vis-widget-body <%== this.data.attr('class') %>">
             
       <audio id="audioRemote" <%= function(element) {  vis.binds.sipadapter.initSIP(element); } %>/>        
@@ -101,6 +73,33 @@
 
     </div>    
   </div>
+  
+	<dialog id="sipAccountDataDialog" <%= function(element) {  vis.binds.sipadapter.accountDialogReady(element); }>
+      <form method="dialog">
+        <label for="accountDataDialogPrivateIdentity">Private Indentity</label>
+        <input id="accountDataDialogPrivateIdentity"/>
+        <br/>
+        <label for="accountDataDialogPublicIdentity">Public Identity</label>
+        <input id="accountDataDialogPublicIdentity"/>
+        <br/>
+        <label for="accountDataDialogPassword">Password</label>
+        <input id="accountDataDialogPassword" type="password"/>
+        <br/>
+        <label for="accountDataDialogDisplayName">Display Name</label>
+        <input id="accountDataDialogDisplayName"/>
+        <br/>
+        <label for="accountDataDialogRealm">Realm</label>
+        <input id="accountDataDialogRealm"/>
+        <br/>
+        <label for="accountDataDialogWebsocketProxyURL">Websocket Proxy URL</label>
+        <input id="accountDataDialogWebsocketProxyURL"/>
+        <br/>
+        <menu>
+          <button id="cancel">Cancel</button>
+          <button id="confirm">Confirm</button>
+        </menu>
+      </form>
+    </dialog>
 
 	<% vis.binds.sipadapter.init(this.data.adapterInstance);  %>
 </script>
